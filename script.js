@@ -4,18 +4,20 @@ var lowercase = "abcdefghijklmnopqrstuvwxyz";
 var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var numbers = "0123456789";
 var specialChar= "!@#$%^&*()_-+=[]{}:;',./<>?|";
-var passwordLength;
+var lengthPassword;
+var checkUppercase;
 
+//figuring out how many characters the user wants
 function lengthDetermine() {
-    passwordLength = prompt("Choose how many characters long you'd like your password to be (between 8-128 characters): ");
+    lengthPassword = prompt("Choose how many characters long you'd like your password to be (between 8-128 characters): ");
 
-    if (passwordLength < 8) {
+    if (lengthPassword < 8) {
         alert("Password length must be a number between 8-128 characters ");
         lengthDetermine();
-    }else if (passwordLength > 128) {
+    }else if (lengthPassword > 128) {
         alert("Password length must be a number between 8-128 characters ");
         lengthDetermine();
-    }else if (isNaN(passwordLength)) {
+    }else if (isNaN(lengthPassword)) {
         alert("Password length must be a number between 8-128 characters ");
         lengthDetermine();
     }else {
@@ -23,9 +25,27 @@ function lengthDetermine() {
     }
 }
 
+//asking user is they want uppercase in their password 
 function uppercaseDetermine() {
-    uppercase = prompt("Would you like to include uppercase letters in you password?\n (Yes or No)");
+    checkUppercase = prompt("Would you like to include uppercase letters in you password?\n (yes or no)");
+    checkUppercase = checkUppercase.toLowerCase();
+
+    if (checkUppercase === "" || checkUppercase === null) {
+        alert("Answer yes or no");
+        uppercaseDetermine();
+    }else if (checkUppercase === "yes") {
+        checkUppercase = true;
+        return checkUppercase;
+    }else if (checkUppercase === "no") {
+        checkUppercase = false;
+        return checkUppercase;
+    }else {
+        alert("Answer yes or no");
+        uppercaseDetermine();
+    }
+    return checkUppercase;
 }
+
 
 
 
