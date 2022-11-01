@@ -6,6 +6,7 @@ var numbers = "0123456789";
 var specialChar= "!@#$%^&*()_-+=[]{}:;',./<>?|";
 var lengthPassword;
 var checkUppercase;
+var checkSpecial;
 
 //figuring out how many characters the user wants
 function lengthDetermine() {
@@ -20,14 +21,12 @@ function lengthDetermine() {
     }else if (isNaN(lengthPassword)) {
         alert("Password length must be a number between 8-128 characters ");
         lengthDetermine();
-    }else {
-        alert("The next questions will ask you if you want to include uppercase letters, numbers, and special characters. If 'No' is selcted for all then your password will only contain lower case letters. ");
     }
 }
 
 //asking user is they want uppercase in their password 
 function uppercaseDetermine() {
-    checkUppercase = prompt("Would you like to include uppercase letters in you password?\n (yes or no)");
+    checkUppercase = prompt("Would you like to include uppercase letters in your password?\n (yes or no)");
     checkUppercase = checkUppercase.toLowerCase();
 
     if (checkUppercase === "" || checkUppercase === null) {
@@ -46,7 +45,27 @@ function uppercaseDetermine() {
     return checkUppercase;
 }
 
+//figuring out if user wants to include special characters
 
+function specialDetermine() {
+    checkSpecial = prompt("Would you like to include special characters in your password\n (yes or no)");
+    checkSpecial = checkSpecial.toLowerCase();
+
+    if (checkSpecial === "" || checkSpecial === null) {
+        alert("Answer yes or no");
+        specialDetermine();
+    }else if (checkSpecial === "yes") {
+        checkSpecial = true;
+        return checkSpecial;
+    }else if (checkSpecial === "no") {
+        checkSpecial = false;
+        return checkSpecial;
+    }else {
+        alert("Answer yes or no");
+        specialDetermine();
+    }
+    return checkSpecial;
+}
 
 
 function generatePassword() {
@@ -54,6 +73,8 @@ function generatePassword() {
     console.log(lengthDetermine);
     uppercaseDetermine();
     console.log(uppercaseDetermine);
+    specialDetermine();
+    console.log(specialDetermine);
   return "generated password";
 }
 
