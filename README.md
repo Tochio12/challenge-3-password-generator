@@ -23,3 +23,4 @@
 * THEN the password is either displayed in an alert or written to the page
 
 ## Website link
+https://tochio12.github.io/challenge-3-password-generator/
