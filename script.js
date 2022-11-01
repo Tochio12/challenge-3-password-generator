@@ -7,6 +7,7 @@ var specialChar= "!@#$%^&*()_-+=[]{}:;',./<>?|";
 var lengthPassword;
 var checkUppercase;
 var checkSpecial;
+var checkNumber;
 
 //figuring out how many characters the user wants
 function lengthDetermine() {
@@ -67,6 +68,28 @@ function specialDetermine() {
     return checkSpecial;
 }
 
+//asking user if he wants to include numbers in the password
+
+function numberDetermine() {
+    checkNumber = prompt("Would you like to inlcude numbers in your password\n (yes or no)");
+    checkNumber = checkNumber.toLowerCase();
+
+    if (checkNumber === "" || checkNumber === null) {
+        alert("Answer yes or no");
+        numberDetermine();
+    }else if (checkNumber === "yes") {
+        checkNumber = true;
+        return checkNumber;
+    }else if (checkNumber === "no") {
+        checkNumber = false;
+        return checkNumber;
+    }else {
+        alert("Answer yes or no");
+        numberDetermine();
+    }
+    return checkNumber;
+}
+
 
 function generatePassword() {
     lengthDetermine();
@@ -75,7 +98,34 @@ function generatePassword() {
     console.log(uppercaseDetermine);
     specialDetermine();
     console.log(specialDetermine);
-  return "generated password";
+    numberDetermine();
+    console.log(numberDetermine);
+    
+    var characters = lowercase;
+    var password = "";
+
+    if (checkNumber && checkSpecial && checkUppercase) {
+        characters += uppercase + numbers + specialChar;
+    }else if (checkUppercase && checkSpecial) {
+        characters += uppercase + specialChar;
+    }else if (checkNumber && checkSpecial) {
+        characters += numbers + specialChar;
+    }else if (checkUppercase && checkNumber) {;
+        characters += uppercase + numbers;
+    }else if (checkSpecial) {
+        characters += specialChar;
+    }else if (checkNumber) {
+        characters += numbers;
+    }else if (checkUppercase) {
+        characters += uppercase;
+    }else {
+        characters === lowercase;
+    }
+
+    for(var i = 0; i < lengthPassword; i++) {
+        password += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return password;
 }
 
 // Write password to the #password input
